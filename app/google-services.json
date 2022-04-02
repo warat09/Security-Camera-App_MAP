@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "873066479966",
+    "project_id": "iot-project-7d920",
+    "storage_bucket": "iot-project-7d920.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:873066479966:android:dec0f8a83bd27606a18fcf",
+        "android_client_info": {
+          "package_name": "th.ac.kmutnb.securitycameraapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "873066479966-q1o9nqj593cn90eotpiggrrail6dbd6a.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA-fpL-cYNaR4GeKLWcS_g1uXKWJfPpIjw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "873066479966-q1o9nqj593cn90eotpiggrrail6dbd6a.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
