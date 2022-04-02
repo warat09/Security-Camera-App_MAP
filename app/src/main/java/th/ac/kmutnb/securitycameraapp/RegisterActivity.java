@@ -56,18 +56,29 @@ public class RegisterActivity extends AppCompatActivity {
                     mconpassword.setError("Confirmpassword is Required");
                     return;
                 }
-                if(password != conpassword){
+                if(!password.equals(conpassword)){
                     mconpassword.setError("Confirmpassword notequal Password");
+                    return;
                 }
                 mAuth.createUserWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if(task.isSuccessful()){
-                            Toast.makeText(RegisterActivity.this,"User Created.",Toast.LENGTH_SHORT).show();
-                            startActivity(new Intent(getApplicationContext(),MainActivity.class));
+                            mAuth.getCurrentUser().sendEmailVerification().addOnCompleteListener(new OnCompleteListener<Void>() {
+                                @Override
+                                public void onComplete(@NonNull Task<Void> task) {
+                                    if(task.isSuccessful()){
+                                        Toast.makeText(RegisterActivity.this,"User Created.",Toast.LENGTH_SHORT).show();
+//                                        startActivity(new Intent(getApplicationContext(),MainActivity.class));
+                                    }
+                                    else{
+                                        Toast.makeText(RegisterActivity.this,task.getException().getMessage(),Toast.LENGTH_LONG).show();
+                                    }
+                                }
+                            });
                         }
                         else{
-                            Toast.makeText(RegisterActivity.this,"Error !" + task.getException().getMessage(),Toast.LENGTH_SHORT).show();
+                            Toast.makeText(RegisterActivity.this,"Error !" + task.getException().getMessage(),Toast.LENGTH_LONG).show();
                         }
                     }
                 });
