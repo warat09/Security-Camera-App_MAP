@@ -31,7 +31,6 @@ public class RegisterActivity extends AppCompatActivity {
         mconpassword = findViewById(R.id.editTextTextPassword2);
         mregisbutton = findViewById(R.id.btnregis);
         mAuth = FirebaseAuth.getInstance();
-
         if(mAuth.getCurrentUser() != null){
             startActivity(new Intent(getApplicationContext(),MainActivity.class));
             finish();

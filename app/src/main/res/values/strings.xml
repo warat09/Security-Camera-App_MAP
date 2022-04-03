@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">SecurityCameraApp</string>
+    <string name="Text1">TextView</string>
 </resources>
