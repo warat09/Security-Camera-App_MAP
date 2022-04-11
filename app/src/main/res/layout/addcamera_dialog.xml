@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@drawable/dialogbackground">
+    <TextView
+        android:id="@+id/Confirm_Add"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="60dp"
+        android:text="เพิ่มกล้อง"
+        android:textColor="#FF9190"
+        android:textSize="25sp" />
+    <TextView
+        android:id="@+id/Add_Cam_Name_Label"
+        android:textColor="#FF9190"
+        android:layout_below="@+id/Confirm_Add"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="20dp"
+        android:text="ชื่อกล้อง :"
+        android:textSize="20sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+    <EditText
+        android:id="@+id/Add_Cam_Name"
+        android:textColor="#FF9190"
+        android:textSize="20dp"
+        android:hint="ชื่อกล้อง"
+        android:layout_marginTop="15dp"
+        android:layout_below="@+id/Confirm_Add"
+        android:layout_marginRight="20dp"
+        android:layout_toRightOf="@+id/Add_Cam_Name_Label"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+    <TextView
+        android:id="@+id/Add_Cam_Id_Label"
+        android:textColor="#FF9190"
+        android:layout_below="@+id/Add_Cam_Name_Label"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="35dp"
+        android:text="ID กล้อง :"
+        android:textSize="20sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+    <EditText
+        android:id="@+id/Add_Cam_Id"
+        android:textColor="#FF9190"
+        android:textSize="20dp"
+        android:hint="ชื่อกล้อง"
+        android:layout_marginTop="15dp"
+        android:layout_below="@+id/Add_Cam_Name"
+        android:layout_marginRight="20dp"
+        android:layout_toRightOf="@+id/Add_Cam_Name_Label"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <Button
+        android:id="@+id/Add_Ok"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/Add_Cam_Id"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="35dp"
+        android:layout_marginTop="40dp"
+        android:text="ยืนยัน"
+        android:textSize="20sp" />
+
+    <Button
+        android:id="@+id/Add_Cancel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/Add_Cam_Id"
+        android:layout_marginLeft="40dp"
+        android:layout_marginTop="40dp"
+        android:layout_toRightOf="@+id/Add_Ok"
+        android:text="ยกเลิก"
+        android:textSize="20sp" />
+    <TextView
+        android:id="@+id/Add_Error"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:textSize="25sp"
+        android:text="มีเจ้าของเเล้วหรือ ID ผิด"
+        android:visibility="invisible"
+        android:layout_marginTop="20dp"
+        android:textColor="#FF9190"
+        android:layout_below="@+id/Add_Ok"/>
+</RelativeLayout>

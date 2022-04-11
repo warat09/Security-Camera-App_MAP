@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@drawable/dialogbackground"
+    android:clipToPadding="true">
+
+    <TextView
+        android:id="@+id/Confirm_Delete"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="60dp"
+        android:text="ยืนยันการลบ"
+        android:textColor="#FF9190"
+        android:textSize="25sp" />
+
+    <Button
+        android:id="@+id/IMG_OK"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/Confirm_Delete"
+        android:layout_marginLeft="35dp"
+        android:layout_marginTop="100dp"
+        android:text="ยืนยัน"
+        android:textSize="20sp"
+        android:layout_alignParentLeft="true"/>
+
+    <Button
+        android:id="@+id/IMG_Cancel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/Confirm_Delete"
+        android:layout_marginLeft="40dp"
+        android:layout_marginTop="100dp"
+        android:layout_toRightOf="@+id/IMG_OK"
+        android:text="ยกเลิก"
+        android:textSize="20sp" />
+</RelativeLayout>

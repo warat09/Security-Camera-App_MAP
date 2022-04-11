@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/Android_project/Android_Project_Final/app/src/main/res/layout/activity_camera.xml" value="0.4370471014492754" />
+        <entry key="..\:/Android_project/Android_Project_Final/app/src/main/res/layout/activity_login.xml" value="0.3179347826086957" />
+        <entry key="..\:/Android_project/Android_Project_Final/app/src/main/res/layout/activity_main.xml" value="0.33" />
+        <entry key="..\:/Android_project/Android_Project_Final/app/src/main/res/layout/activity_register.xml" value="0.3793859649122807" />
+        <entry key="..\:/Android_project/Android_Project_Final/app/src/main/res/layout/addcamera_dialog.xml" value="0.29780701754385963" />
+        <entry key="..\:/Android_project/Android_Project_Final/app/src/main/res/layout/cameralist.xml" value="0.5" />
+        <entry key="..\:/Android_project/Android_Project_Final/app/src/main/res/layout/delete_dialog.xml" value="0.4216485507246377" />
+        <entry key="..\:/Android_project/Android_Project_Final/app/src/main/res/layout/fragment_cameraimg.xml" value="0.37228260869565216" />
+        <entry key="..\:/Android_project/Android_Project_Final/app/src/main/res/layout/fragment_cameramodeselect.xml" value="0.25" />
+        <entry key="..\:/Android_project/Android_Project_Final/app/src/main/res/layout/fragment_camerarealtime.xml" value="0.2964912280701754" />
+        <entry key="..\:/Android_project/Android_Project_Final/app/src/main/res/layout/fragment_home.xml" value="0.3532608695652174" />
+        <entry key="..\:/Android_project/Android_Project_Final/app/src/main/res/layout/fragment_homecamera.xml" value="0.25" />
+        <entry key="..\:/Android_project/Android_Project_Final/app/src/main/res/layout/fragment_homenotification.xml" value="0.33967391304347827" />
+        <entry key="..\:/Android_project/Android_Project_Final/app/src/main/res/layout/fragment_homesetting.xml" value="0.33967391304347827" />
+        <entry key="..\:/Android_project/Android_Project_Final/app/src/main/res/layout/fragment_i_m_g_show.xml" value="0.3066123188405797" />
+        <entry key="..\:/Android_project/Android_Project_Final/app/src/main/res/layout/imglist.xml" value="0.35043859649122805" />
+      </map>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/build/classes" />
+  </component>
+  <component name="ProjectType">
+    <option name="id" value="Android" />
+  </component>
+</project>
