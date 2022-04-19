@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.os.Message;
 import android.text.TextUtils;
 import android.util.Log;
+import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -28,7 +29,8 @@ public class RegisterActivity extends AppCompatActivity implements VolleyListene
     Button rRegister,rCancel;
     private final String KEY_PREFS = "prefs_user";
     private final String KEY_USERNAME = "email";
-    private final String KEY_PASSWORD = "password";
+    private final String KEY_TOKEN = "token";
+    private String Token;
     private RequestQueue mQueue;
     SharedPreferences sharedPreferences;
     @Override
@@ -80,6 +82,14 @@ public class RegisterActivity extends AppCompatActivity implements VolleyListene
                     rConpassword.setError("Confirmpassword notequal Password");
                     return;
                 }
+                else if(!Patterns.EMAIL_ADDRESS.matcher(email).matches()){
+                    rEmail.setError("Please enter a valid email address");
+                    return;
+                }
+                else if(password.length() < 6){
+                    rPasswod.setError("Your password must be at least 6 characters long.");
+                    return;
+                }
                 else
                 {
                     String postUrl = "http://192.168.0.111:9090/User/register";
@@ -98,14 +108,19 @@ public class RegisterActivity extends AppCompatActivity implements VolleyListene
                     JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, postUrl, postData, new Response.Listener<JSONObject>() {
                         @Override
                         public void onResponse(JSONObject response) {
-                            Log.d("TEST",response.toString());
+                            try {
+                                Token = response.getString("Token");
+                            }
+                            catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+                            Log.d("TEST",Token);
                             callback.Loaded_Data(true);
                         }
                     }, new Response.ErrorListener() {
                         @Override
                         public void onErrorResponse(VolleyError error) {
                             Toast.makeText(RegisterActivity.this, "Email or Password Already USE!!!", Toast.LENGTH_LONG).show();
-
                         }
                     });
                     requestQueue.add(jsonObjectRequest);
@@ -121,7 +136,7 @@ public class RegisterActivity extends AppCompatActivity implements VolleyListene
             sharedPreferences = getSharedPreferences(KEY_PREFS,MODE_PRIVATE);
             SharedPreferences.Editor editor = sharedPreferences.edit();
             editor.putString(KEY_USERNAME, rEmail.getText().toString().trim());
-            editor.putString(KEY_PASSWORD, rPasswod.getText().toString().trim());
+            editor.putString(KEY_TOKEN,this.Token);
             editor.apply();
             startActivity(new Intent(getApplicationContext(), MainActivity.class));
         }

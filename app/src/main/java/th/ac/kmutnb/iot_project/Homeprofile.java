@@ -7,13 +7,14 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link Homenotification#newInstance} factory method to
+ * Use the {@link Homeprofile#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class Homenotification extends Fragment {
+public class Homeprofile extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -23,8 +24,11 @@ public class Homenotification extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
-
-    public Homenotification() {
+    private View view;
+    private String Email;
+    private String Username;
+    private String Phone;
+    public Homeprofile() {
         // Required empty public constructor
     }
 
@@ -37,8 +41,8 @@ public class Homenotification extends Fragment {
      * @return A new instance of fragment Homenotification.
      */
     // TODO: Rename and change types and number of parameters
-    public static Homenotification newInstance(String param1, String param2) {
-        Homenotification fragment = new Homenotification();
+    public static Homeprofile newInstance(String param1, String param2) {
+        Homeprofile fragment = new Homeprofile();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -59,6 +63,16 @@ public class Homenotification extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_homenotification, container, false);
+        this.Username  = getArguments().getString("User_ID");
+        this.Email = getArguments().getString("User_Email");
+        this.Phone = getArguments().getString("User_Phone");
+        view = inflater.inflate(R.layout.fragment_homeprofile, container, false);
+        TextView txUsername = view.findViewById(R.id.Profile_Username);
+        txUsername.setText("Username : "+this.Username);
+        TextView txEmail = view.findViewById(R.id.Profile_Email);
+        txEmail.setText("Email : "+this.Email);
+        TextView txPhone = view.findViewById(R.id.Profile_Phone);
+        txPhone.setText("Phone : "+this.Phone);
+        return view;
     }
 }

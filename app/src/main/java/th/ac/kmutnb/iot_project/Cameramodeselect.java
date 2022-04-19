@@ -20,6 +20,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -31,6 +32,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.text.SimpleDateFormat;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -47,9 +50,9 @@ public class Cameramodeselect extends Fragment implements VolleyListener {
     private String User_Name;
     private String Camera_Id;
     private String Camera_Name;
+    private String Token;
     private boolean Camera_Sensor;
     private boolean Camera_Ready;
-
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
@@ -95,6 +98,7 @@ public class Cameramodeselect extends Fragment implements VolleyListener {
         this.Camera_Name = getArguments().getString("Cam_Name");
         this.Camera_Sensor = getArguments().getBoolean("Cam_Sensor");
         this.Camera_Ready = getArguments().getBoolean("Cam_Ready");
+        this.Token = getArguments().getString("Token");
         TextView name = view.findViewById(R.id.Select_Camera_Name);
         name.setText(this.Camera_Name);
         EditText editname = view.findViewById(R.id.Select_Camera_Edit_Name);
@@ -126,7 +130,14 @@ public class Cameramodeselect extends Fragment implements VolleyListener {
                             InputMethodManager inputManager = (InputMethodManager) view.getContext().getSystemService(view.getContext().INPUT_METHOD_SERVICE);
                             inputManager.hideSoftInputFromWindow(editname.getWindowToken(),InputMethodManager.HIDE_NOT_ALWAYS);
                         }
-                    });
+                    }){
+                        @Override
+                        public Map<String, String> getHeaders() throws AuthFailureError {
+                            Map<String, String> params = new HashMap<String, String>();
+                            params.put("Authorization", Token);
+                            return params;
+                        }
+                    };
                     requestQueue.add(jsonObjectRequest);
                     return true;
                 }
@@ -167,6 +178,7 @@ public class Cameramodeselect extends Fragment implements VolleyListener {
                     args.putString("UserName",User_Name);
                     args.putString("Cam_Id",Camera_Id);
                     args.putString("Cam_Name",Camera_Name);
+                    args.putString("Token",Token);
                     IMG.setArguments(args);
                     getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.Fragment_Home,IMG).addToBackStack(null).commit();
             }
@@ -176,6 +188,12 @@ public class Cameramodeselect extends Fragment implements VolleyListener {
             @Override
             public void onClick(View view) {
                 Camerarealtime real = new Camerarealtime();
+                Bundle args = new Bundle();
+                args.putString("UserName",User_Name);
+                args.putString("Cam_Id",Camera_Id);
+                args.putString("Cam_Name",Camera_Name);
+                args.putString("Token",Token);
+                real.setArguments(args);
                 getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.Fragment_Home,real).addToBackStack(null).commit();
             }
         });
@@ -208,7 +226,14 @@ public class Cameramodeselect extends Fragment implements VolleyListener {
                                 error.printStackTrace();
                                 callback.Loaded_Data(true);
                             }
-                        });
+                        }){
+                            @Override
+                            public Map<String, String> getHeaders() throws AuthFailureError {
+                                Map<String, String> params = new HashMap<String, String>();
+                                params.put("Authorization", Token);
+                                return params;
+                            }
+                        };
                         requestQueue.add(jsonObjectRequest);
                         dialog.dismiss();
                     }

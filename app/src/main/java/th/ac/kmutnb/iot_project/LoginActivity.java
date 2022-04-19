@@ -27,7 +27,7 @@ public class LoginActivity extends AppCompatActivity {
     SharedPreferences sharedPreferences;
     private final String KEY_PREFS = "prefs_user";
     private final String KEY_USERNAME = "email";
-    private final String KEY_PASSWORD = "password";
+    private final String KEY_TOKEN = "token";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -79,7 +79,7 @@ public class LoginActivity extends AppCompatActivity {
                                 if (response.getString("message").equals("Login Success!!")) {
                                     SharedPreferences.Editor editor = sharedPreferences.edit();
                                     editor.putString(KEY_USERNAME, email);
-                                    editor.putString(KEY_PASSWORD, password);
+                                    editor.putString(KEY_TOKEN,response.getString("Token"));
                                     editor.apply();
                                     startActivity(new Intent(getApplicationContext(), MainActivity.class));
                                 }

@@ -21,6 +21,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -34,7 +35,9 @@ import org.json.JSONObject;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -55,6 +58,7 @@ public class Cameraimg extends Fragment implements VolleyListener{
     private String User_Name;
     private String Camera_Id;
     private String Camera_Name;
+    private String Token;
     private RequestQueue mQueue;
     private String Get_Camera_URL ="http://192.168.0.111:9090/IMG/getIMG/";
     ProgressDialog pDialog;
@@ -101,6 +105,7 @@ public class Cameraimg extends Fragment implements VolleyListener{
         this.User_Name = getArguments().getString("UserName");
         this.Camera_Id = getArguments().getString("Cam_Id");
         this.Camera_Name = getArguments().getString("Cam_Name");
+        this.Token = getArguments().getString("Token");
         TextView tx = view.findViewById(R.id.Camera_Name);
         tx.setText(this.Camera_Name);
         ImageButton imb = view.findViewById(R.id.Exit_IMG);
@@ -140,10 +145,7 @@ public class Cameraimg extends Fragment implements VolleyListener{
                     {
                         IMG_Data_List_Temp.add(IMG_Data_List.get(j));
                     }
-//                    if(Camera_Data_List.get(j).getName().substring(0,searchCamera.getText().length()).equals(searchCamera.getText().toString()))
-//                    {
-//                        Camera_Data_List_Temp.add(Camera_Data_List.get(j));
-//                    }
+
                 }
                 callback.Loaded_Data(true);
             }
@@ -185,7 +187,14 @@ public class Cameraimg extends Fragment implements VolleyListener{
                     public void onErrorResponse(VolleyError error) {
                         callback.Loaded_Data(false);
                     }
-                });
+                }){
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("Authorization", Token);
+                return params;
+            }
+        };
         mQueue = Volley.newRequestQueue(view.getContext());
         mQueue.add(Camera_Data_Request);
         return view;
@@ -199,19 +208,20 @@ public class Cameraimg extends Fragment implements VolleyListener{
         Lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View v, int i, long l) {
-                EditText search_img = view.findViewById(R.id.Search_IMG);
-                search_img.setText("");
                 IMGShow IMG = new IMGShow();
                 Bundle args = new Bundle();
-                String Date = new SimpleDateFormat("dd/MM/yyyy").format(IMG_Data_List.get(i).getIMGDate());
-                String Time = new SimpleDateFormat("HH:mm:ss").format(IMG_Data_List.get(i).getIMGDate());
-                String Dabase_Date = new SimpleDateFormat("yyyy-MM-dd").format(IMG_Data_List.get(i).getIMGDate())+"|"+new SimpleDateFormat("HH:mm:ss").format(IMG_Data_List.get(i).getIMGDate());
-                args.putStringArray("IMG",IMG_Data_List.get(i).getIMG());
+                String Date = new SimpleDateFormat("dd/MM/yyyy").format(IMG_Data_List_Temp.get(i).getIMGDate());
+                String Time = new SimpleDateFormat("HH:mm:ss").format(IMG_Data_List_Temp.get(i).getIMGDate());
+                String Dabase_Date = new SimpleDateFormat("yyyy-MM-dd").format(IMG_Data_List_Temp.get(i).getIMGDate())+"|"+new SimpleDateFormat("HH:mm:ss").format(IMG_Data_List_Temp.get(i).getIMGDate());
+                args.putStringArray("IMG",IMG_Data_List_Temp.get(i).getIMG());
                 args.putString("Date","วันที่ "+Date+"\n"+"เวลา "+Time+" น.");
                 args.putString("Database_Date",Dabase_Date);
                 args.putString("CameraName",Camera_Name);
                 args.putString("Camera_ID",Camera_Id);
+                args.putString("Token",Token);
                 IMG.setArguments(args);
+                EditText search_img = view.findViewById(R.id.Search_IMG);
+                search_img.setText("");
                 getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.Fragment_Home,IMG).addToBackStack(null).commit();
             }
         });
