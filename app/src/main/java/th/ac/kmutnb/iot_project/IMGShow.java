@@ -20,6 +20,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.ViewSwitcher;
 
+import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -29,6 +30,9 @@ import com.android.volley.toolbox.Volley;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -44,6 +48,7 @@ public class IMGShow extends Fragment implements VolleyListener{
     private View view;
     private String Camera_Name;
     private String IMG_Date;
+    private String Token;
     private String[] IMG;
     private String Database_Date;
     private String Camera_Id;
@@ -91,6 +96,7 @@ public class IMGShow extends Fragment implements VolleyListener{
         this.Camera_Name = getArguments().getString("CameraName");
         this.Camera_Id = getArguments().getString("Camera_ID");
         this.Database_Date = getArguments().getString("Database_Date");
+        this.Token = getArguments().getString("Token");
         TextView Cam_name = view.findViewById(R.id.IMG_Camera_Name);
         Cam_name.setText(this.Camera_Name);
         TextView Cam_date = view.findViewById(R.id.IMG_Camera_Date);
@@ -166,7 +172,14 @@ public class IMGShow extends Fragment implements VolleyListener{
                                 error.printStackTrace();
                                 callback.Loaded_Data(true);
                             }
-                        });
+                        }){
+                            @Override
+                            public Map<String, String> getHeaders() throws AuthFailureError {
+                                Map<String, String> params = new HashMap<String, String>();
+                                params.put("Authorization", Token);
+                                return params;
+                            }
+                        };
                         requestQueue.add(jsonObjectRequest);
                         dialog.dismiss();
                     }

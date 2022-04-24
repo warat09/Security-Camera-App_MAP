@@ -28,4 +28,5 @@ public class CameraData {
     {
         return this.Camera_Ready;
     }
+    public void setSensor(boolean C){this.Camera_Sensor=C;}
 }

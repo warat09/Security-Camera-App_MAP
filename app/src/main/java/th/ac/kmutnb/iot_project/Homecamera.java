@@ -21,6 +21,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -34,7 +35,9 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -49,6 +52,7 @@ public class Homecamera extends Fragment implements VolleyListener{
     private static final String ARG_PARAM2 = "param2";
     private RequestQueue mQueue;
     private String User_ID;
+    private String Token;
     ProgressDialog pDialog;
     private List<CameraData> Camera_Data_List = new ArrayList<>();
     private List<CameraData> Camera_Data_List_Temp = new ArrayList<>();
@@ -95,6 +99,7 @@ public class Homecamera extends Fragment implements VolleyListener{
         VolleyListener callback = this;
         view = inflater.inflate(R.layout.fragment_homecamera,container,false);
         this.User_ID  = getArguments().getString("User_ID");
+        this.Token = getArguments().getString("Token");
         EditText searchCamera = view.findViewById(R.id.Search_Camera);
         searchCamera.setOnKeyListener(new View.OnKeyListener() {
             @Override
@@ -179,7 +184,14 @@ public class Homecamera extends Fragment implements VolleyListener{
                                     error.printStackTrace();
                                     callback.Loaded_Data(true);
                                 }
-                            });
+                            }){
+                                @Override
+                                public Map<String, String> getHeaders() throws AuthFailureError {
+                                    Map<String, String> params = new HashMap<String, String>();
+                                    params.put("Authorization", Token);
+                                    return params;
+                                }
+                            };
                             requestQueue.add(jsonObjectRequest);
                         }
                     }
@@ -220,15 +232,22 @@ public class Homecamera extends Fragment implements VolleyListener{
                     public void onErrorResponse(VolleyError error) {
                         callback.Loaded_Data(false);
                     }
-                });
+                }){
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("Authorization", Token);
+                return params;
+            }
+        };
         mQueue = Volley.newRequestQueue(view.getContext());
         mQueue.add(Camera_Data_Request);
         return view;
     }
-    public String getName(int i){return this.Camera_Data_List.get(i).getName();}
-    public String getId(int i){return this.Camera_Data_List.get(i).getID();}
-    public Boolean getSensor(int i){return this.Camera_Data_List.get(i).getSensor();}
-    public Boolean getCamera(int i){return this.Camera_Data_List.get(i).getReady();}
+    public String getName(int i){return this.Camera_Data_List_Temp.get(i).getName();}
+    public String getId(int i){return this.Camera_Data_List_Temp.get(i).getID();}
+    public Boolean getSensor(int i){return this.Camera_Data_List_Temp.get(i).getSensor();}
+    public Boolean getCamera(int i){return this.Camera_Data_List_Temp.get(i).getReady();}
     @Override
     public void Loaded_Data(boolean Work){
         if(Work)
@@ -239,16 +258,17 @@ public class Homecamera extends Fragment implements VolleyListener{
             Lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> adapterView, View v, int i, long l) {
-                    EditText searchCamera = view.findViewById(R.id.Search_Camera);
-                    searchCamera.setText("");
                     Cameramodeselect mode = new Cameramodeselect();
                     Bundle args = new Bundle();
                     args.putString("UserName",User_ID);
                     args.putString("Cam_Id",getId(i));
+                    args.putString("Token",Token);
                     args.putString("Cam_Name",getName(i));
                     args.putBoolean("Cam_Sensor",getSensor(i));
                     args.putBoolean("Cam_Ready",getCamera(i));
                     mode.setArguments(args);
+                    EditText searchCamera = view.findViewById(R.id.Search_Camera);
+                    searchCamera.setText("");
                     getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.Fragment_Home,mode).addToBackStack(null).commit();
                 }
             });

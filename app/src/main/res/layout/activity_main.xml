@@ -67,12 +67,12 @@
         tools:layout_editor_absoluteX="0dp" />
 
     <ImageButton
-        android:id="@+id/Notification_Home"
+        android:id="@+id/Profile_Home"
         android:layout_width="80dp"
         android:layout_height="80dp"
         android:layout_marginLeft="40dp"
         android:backgroundTint="@android:color/transparent"
-        android:src="@drawable/noti"
+        android:src="@drawable/profilemeun"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
