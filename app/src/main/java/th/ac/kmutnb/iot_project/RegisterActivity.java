@@ -92,7 +92,7 @@ public class RegisterActivity extends AppCompatActivity implements VolleyListene
                 }
                 else
                 {
-                    String postUrl = "http://192.168.0.111:9090/User/register";
+                    String postUrl = "http://192.168.1.101:9090/User/register";
                     RequestQueue requestQueue = Volley.newRequestQueue(RegisterActivity.this);
 
                     JSONObject postData = new JSONObject();

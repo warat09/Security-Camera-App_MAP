@@ -20,9 +20,10 @@
         app:layout_constraintVertical_bias="0.142" />
 
     <ImageView
-        android:layout_marginTop="270dp"
+        android:id="@+id/imageView3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="270dp"
         android:src="@drawable/dialogbackground"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -76,8 +77,8 @@
         android:inputType="textPassword"
         android:maxLines="1"
         android:textColor="#FF9190"
-        android:textSize="20sp"
         android:textColorHint="#ffb1b0"
+        android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.391"
@@ -111,5 +112,15 @@
         app:layout_constraintVertical_bias="0.0"
         android:layout_marginTop="600dp"
         android:text="Register"/>
+
+    <TextView
+        android:id="@+id/btnforgetpassword"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="60dp"
+        android:layout_marginTop="4dp"
+        android:text="forgetpassword?"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/Login_Password" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -9,6 +9,7 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -23,6 +24,7 @@ import org.json.JSONObject;
 
 public class LoginActivity extends AppCompatActivity {
     EditText lEmail,lpassword;
+    TextView lforgetpassword;
     Button lLogin,lRegister;
     SharedPreferences sharedPreferences;
     private final String KEY_PREFS = "prefs_user";
@@ -36,6 +38,7 @@ public class LoginActivity extends AppCompatActivity {
         lpassword = findViewById(R.id.Login_Password);
         lLogin = findViewById(R.id.Login_Ok);
         lRegister = findViewById(R.id.Login_Register);
+        lforgetpassword = findViewById(R.id.btnforgetpassword);
         sharedPreferences = getSharedPreferences(KEY_PREFS,MODE_PRIVATE);
         String EMAIL = sharedPreferences.getString(KEY_USERNAME,null);
         if(EMAIL != null){
@@ -61,7 +64,7 @@ public class LoginActivity extends AppCompatActivity {
                     return;
                 }
                 else {
-                    String postUrl = "http://192.168.0.111:9090/User";
+                    String postUrl = "http://192.168.1.101:9090/User";
                     RequestQueue requestQueue = Volley.newRequestQueue(LoginActivity.this);
                     JSONObject postData = new JSONObject();
                     try {
@@ -96,6 +99,12 @@ public class LoginActivity extends AppCompatActivity {
 
                     requestQueue.add(jsonObjectRequest);
                 }
+            }
+        });
+        lforgetpassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getApplicationContext(),ForgetPassword.class));
             }
         });
     }
