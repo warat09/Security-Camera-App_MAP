@@ -6,7 +6,16 @@
     android:layout_height="match_parent"
     tools:context=".RegisterActivity"
     android:background="@drawable/background">
-
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/camerasel"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.872"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.103" />
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -51,8 +60,8 @@
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="60dp"
         android:layout_marginTop="350dp"
-        android:backgroundTint="#FF9190"
         android:hint="Email"
+        android:backgroundTint="#FF9190"
         android:inputType="textEmailAddress"
         android:maxLines="1"
         android:textColor="#FF9190"

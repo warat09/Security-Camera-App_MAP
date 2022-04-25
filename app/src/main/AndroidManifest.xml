@@ -13,7 +13,7 @@
         android:theme="@style/Theme.IoT_Project"
         android:usesCleartextTraffic="true">
         <activity
-            android:name=".ForgetPassword"
+            android:name=".ForgetPasswordActivity"
             android:exported="false" />
         <activity
             android:name=".RegisterActivity"

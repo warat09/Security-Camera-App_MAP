@@ -75,7 +75,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         pDialog.show();
         SharedPreferences sharedPreferences = getSharedPreferences(KEY_PREFS, MODE_PRIVATE);
         this.Token = sharedPreferences.getString("token",null);
-        JsonObjectRequest Camera_Data_Request = new JsonObjectRequest(Request.Method.GET, "http://192.168.1.101:9090/User/getprofile/" + sharedPreferences.getString(KEY_USERNAME,null), null,
+        JsonObjectRequest Camera_Data_Request = new JsonObjectRequest(Request.Method.GET, "http://192.168.0.111:9090/User/getprofile/" + sharedPreferences.getString(KEY_USERNAME,null), null,
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
@@ -182,6 +182,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void Loaded_Data(boolean Work) {
         if(Work == true)
         {
+            Log.d("TEST",this.User_ID);
             FirebaseMessaging.getInstance().subscribeToTopic(this.User_ID)
                     .addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override

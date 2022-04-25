@@ -24,17 +24,22 @@
         android:textSize="20sp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
+
     <EditText
         android:id="@+id/Add_Cam_Name"
-        android:textColor="#FF9190"
-        android:textSize="20dp"
-        android:hint="ชื่อกล้อง"
-        android:layout_marginTop="15dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_below="@+id/Confirm_Add"
+        android:layout_marginTop="15dp"
         android:layout_marginRight="20dp"
         android:layout_toRightOf="@+id/Add_Cam_Name_Label"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:hint="ชื่อกล้อง"
+        android:backgroundTint="#FF9190"
+        android:inputType="textEmailAddress"
+        android:maxLines="1"
+        android:textColor="#FF9190"
+        android:textColorHint="#ffb1b0"
+        android:textSize="20dp" />
     <TextView
         android:id="@+id/Add_Cam_Id_Label"
         android:textColor="#FF9190"
@@ -46,17 +51,22 @@
         android:textSize="20sp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
+
     <EditText
         android:id="@+id/Add_Cam_Id"
-        android:textColor="#FF9190"
-        android:textSize="20dp"
-        android:hint="ชื่อกล้อง"
-        android:layout_marginTop="15dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_below="@+id/Add_Cam_Name"
+        android:layout_marginTop="15dp"
         android:layout_marginRight="20dp"
         android:layout_toRightOf="@+id/Add_Cam_Name_Label"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:hint="ID กล้อง"
+        android:backgroundTint="#FF9190"
+        android:inputType="textEmailAddress"
+        android:maxLines="1"
+        android:textColor="#FF9190"
+        android:textColorHint="#ffb1b0"
+        android:textSize="20dp" />
 
     <Button
         android:id="@+id/Add_Ok"

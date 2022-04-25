@@ -12,6 +12,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -21,6 +22,9 @@ import com.android.volley.toolbox.Volley;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class LoginActivity extends AppCompatActivity {
     EditText lEmail,lpassword;
@@ -41,8 +45,29 @@ public class LoginActivity extends AppCompatActivity {
         lforgetpassword = findViewById(R.id.btnforgetpassword);
         sharedPreferences = getSharedPreferences(KEY_PREFS,MODE_PRIVATE);
         String EMAIL = sharedPreferences.getString(KEY_USERNAME,null);
-        if(EMAIL != null){
-            startActivity(new Intent(getApplicationContext(),MainActivity.class));
+        String Token = sharedPreferences.getString(KEY_TOKEN,null);
+        if(EMAIL != null && Token!=null){
+            String TestToken = "http://192.168.0.111:9090/User/tokenverifye";
+            RequestQueue requestQueue = Volley.newRequestQueue(LoginActivity.this);
+            JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, TestToken,null, new Response.Listener<JSONObject>() {
+                @Override
+                public void onResponse(JSONObject response) {
+                    startActivity(new Intent(getApplicationContext(),MainActivity.class));
+                }
+            }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    Toast.makeText(LoginActivity.this, error.toString(), Toast.LENGTH_LONG).show();
+                }
+            }){
+                @Override
+                public Map<String, String> getHeaders() throws AuthFailureError {
+                    Map<String, String> params = new HashMap<String, String>();
+                    params.put("Authorization", Token);
+                    return params;
+                }
+            };
+            requestQueue.add(jsonObjectRequest);
         }
         lRegister.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -64,7 +89,7 @@ public class LoginActivity extends AppCompatActivity {
                     return;
                 }
                 else {
-                    String postUrl = "http://192.168.1.101:9090/User";
+                    String postUrl = "http://192.168.0.111:9090/User";
                     RequestQueue requestQueue = Volley.newRequestQueue(LoginActivity.this);
                     JSONObject postData = new JSONObject();
                     try {
@@ -104,7 +129,7 @@ public class LoginActivity extends AppCompatActivity {
         lforgetpassword.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(getApplicationContext(),ForgetPassword.class));
+                startActivity(new Intent(getApplicationContext(),ForgetPasswordActivity.class));
             }
         });
     }

@@ -30,7 +30,7 @@ public class RegisterActivity extends AppCompatActivity implements VolleyListene
     private final String KEY_PREFS = "prefs_user";
     private final String KEY_USERNAME = "email";
     private final String KEY_TOKEN = "token";
-    private String Token;
+    private String Token="TEST";
     private RequestQueue mQueue;
     SharedPreferences sharedPreferences;
     @Override
@@ -92,7 +92,7 @@ public class RegisterActivity extends AppCompatActivity implements VolleyListene
                 }
                 else
                 {
-                    String postUrl = "http://192.168.1.101:9090/User/register";
+                    String postUrl = "http://192.168.0.111:9090/User/register";
                     RequestQueue requestQueue = Volley.newRequestQueue(RegisterActivity.this);
 
                     JSONObject postData = new JSONObject();
@@ -108,19 +108,13 @@ public class RegisterActivity extends AppCompatActivity implements VolleyListene
                     JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, postUrl, postData, new Response.Listener<JSONObject>() {
                         @Override
                         public void onResponse(JSONObject response) {
-                            try {
-                                Token = response.getString("Token");
-                            }
-                            catch (JSONException e) {
-                                e.printStackTrace();
-                            }
-                            Log.d("TEST",Token);
+                            Toast.makeText(RegisterActivity.this, "Please confirm Email!!!", Toast.LENGTH_LONG).show();
                             callback.Loaded_Data(true);
                         }
                     }, new Response.ErrorListener() {
                         @Override
                         public void onErrorResponse(VolleyError error) {
-                            Toast.makeText(RegisterActivity.this, "Email or Password Already USE!!!", Toast.LENGTH_LONG).show();
+                            Toast.makeText(RegisterActivity.this, "Email or Username Already USE!!!", Toast.LENGTH_LONG).show();
                         }
                     });
                     requestQueue.add(jsonObjectRequest);
@@ -133,12 +127,7 @@ public class RegisterActivity extends AppCompatActivity implements VolleyListene
     public void Loaded_Data(boolean Work) {
         if(Work==true)
         {
-            sharedPreferences = getSharedPreferences(KEY_PREFS,MODE_PRIVATE);
-            SharedPreferences.Editor editor = sharedPreferences.edit();
-            editor.putString(KEY_USERNAME, rEmail.getText().toString().trim());
-            editor.putString(KEY_TOKEN,this.Token);
-            editor.apply();
-            startActivity(new Intent(getApplicationContext(), MainActivity.class));
+            startActivity(new Intent(getApplicationContext(), LoginActivity.class));
         }
     }
 }
